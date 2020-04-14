@@ -25,6 +25,14 @@ mvn package
 docker-compose -f docker/docker-compose.yml up
 ```
 
+If apm server does not start use:
+
+```bash
+docker-compose -f docker/docker-compose.yml restart java-app apm
+```
+
+It is because Elasticsearch sometimes take a bit longer to start.
+
 ## Architecture
 All services will be running as docker containers. Since we are going to monitor performance for the java application, we will run it in a docker container, then the container will be profiled by a java agent provided by Elastic. The java agent collects metrics and sends them to the APM server which is also running in a separate container. Once the metrics are stored in Elasticsearch, the performance can be explored by using Kibana built-in APM dashboards.
 
